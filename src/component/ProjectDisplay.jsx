@@ -20,7 +20,6 @@ function ProjectDisplay() {
       setOverview([details])
       setoverviewtoggle(!overviewtoggle);
     
-      // Block scroll body when modal open
       if (document.body.style.overflow !== "hidden") {
          document.body.style.overflow = "hidden"; 
       } else {
@@ -62,15 +61,19 @@ function ProjectDisplay() {
       </motion.div>
 
   {/* Modal */}
-    {overviewtoggle && ( 
-      <div className={`{${styles.paddingX} overview-container overflow-hidden z-1  onClick={changeOverview} flex justify-center items-center mt-20`} >
-      <div className= "overview-body  " 
+
+    {overviewtoggle && (
+    
+      <div className={`{${styles.paddingX} overview-container overflow-hidden overflow-y-scroll overscroll-none
+       scrollbar scrollbar-thumb-pink-50 scrollbar-track-slate-600  z-1  onClick={changeOverview} flex justify-center items-center`} >
+      <div className= "overview-body" 
         onClick={(e)=>e.stopPropagation()}  >
       <div className= "overview-header  relative">
         <button onClick={changeOverview} className="close hover:bg-secondary">Close</button>
       </div>
+    
      
-      <div className="overview-content overflow-hidden mt-2">
+      <div className="overview-content overflow-hidden ">
         {overview.map((modal)=>{
           return(
              <div className = "content-car" key={modal.id}>
@@ -81,12 +84,12 @@ function ProjectDisplay() {
                    pip={true}
                    controls={true}
                    playing={true}
-                   className="videobox  xl:w-1/2"
+                   className="videobox  xl:w-1/2 "
                 />
               
-             <div className= 'details text-center text-secondary  overscroll-auto flex flex-col justify-center items-center' >
-                <p className='text-3xl font-bold title-description'> {modal.title}</p>
-                <p className="text-[20px] text-center description">{modal.description}</p>
+             <div className= 'details text-center text-secondary  overscroll-auto flex flex-col justify-center items-center ' >
+                <p className='text-3xl font-bold title-description mt-2'> {modal.title}</p>
+                <p className="text-[20px] text-center description mx-10 mt-2">{modal.description}</p>
      
                  {/* icon github */}
                 <div
@@ -103,27 +106,16 @@ function ProjectDisplay() {
 
           )
         })}
-
+        
       </div>
       </div>
      </div>
+   
      
 )}
-   
-
-
 
 
       
-
-       
-
-
-
-
-
-
-    
 
     </div>
   )
